@@ -8,6 +8,7 @@ import requests
 import sys
 
 if __name__ == "__main__":
+    """main"""
     id = sys.argv[1]
     usr_url = "https://jsonplaceholder.typicode.com/users/{}".format(id)
     todos_url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(id)
