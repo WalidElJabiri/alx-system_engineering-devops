@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # displays information about subdomains.
 domain=${1}
-sub=(${2:-www lb-01 web-01 web-02})
+subdomains=(${2:-www lb-01 web-01 web-02})
 
 sub_data() {
 	dig "${1}.${2}" | awk -v subdomain="${1}" '/ANSWER SECTION:/ { getline; print "The subdomain", subdomain, "is a", $4, "record and points to", $5 }'
 }
 
-for subdomain in "${sub[@]}"; do
+for subdomain in "${subdomains[@]}"; do
 	sub_data "$subdomain" "$domain"
 done
