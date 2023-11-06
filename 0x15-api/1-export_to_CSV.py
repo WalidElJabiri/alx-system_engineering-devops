@@ -10,10 +10,10 @@ import sys
 if __name__ == "__main__":
     id = sys.argv[1]
     usr_url = "https://jsonplaceholder.typicode.com/users/{}".format(id)
-    todos_url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(id)
+    tds_url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(id)
 
     u = requests.get(usr_url).json()
-    tds = requests.get(todos_url).json()
+    tds = requests.get(tds_url).json()
 
     with open('{}.csv'.format(id), 'w') as csv_file:
         csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)

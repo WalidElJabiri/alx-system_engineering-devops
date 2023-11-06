@@ -18,11 +18,11 @@ if __name__ == "__main__":
         url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(id)
         todos = requests.get(url).json()
 
-    tasks = []
-    for t in todos:
-        tasks.append({"task": t.get("title"),
-                      "completed": t.get("completed"),
-                      "username": user.get("username")})
+        tasks = []
+        for t in todos:
+            tasks.append({"task": t.get("title"),
+                          "completed": t.get("completed"),
+                          "username": user.get("username")})
         data["{}".format(id)] = tasks
 
     with open('todo_all_employees.json', 'w') as f:

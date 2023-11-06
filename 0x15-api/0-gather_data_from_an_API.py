@@ -11,10 +11,10 @@ if __name__ == "__main__":
     """main"""
     id = sys.argv[1]
     usr_url = "https://jsonplaceholder.typicode.com/users/{}".format(id)
-    todos_url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(id)
+    tds_url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(id)
 
     user = requests.get(usr_url).json()
-    tds = requests.get(todos_url).json()
+    tds = requests.get(tds_url).json()
 
     completed_nb = 0
     total_nb = 0
