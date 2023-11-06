@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 # displays information about subdomains.
 
-domain=${1}
-subdomains=(${2:-www lb-01 web-01 web-02})
-
-subdomain_data() {
-	dig "${1}.${2}" | awk -v subdomain="${1}" '/ANSWER SECTION:/ { getline; print "The subdomain", subdomain, "is a", $4, "record and points to", $5 }'
+print_rec ()
+{
+	printf "The subdomain %s is a " "$2"
+	dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $4 }'
+	printf " record and points to "
+	dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk -F' ' '{ printf $5 }'
+	echo ""
 }
 
-for subdomain in "${subdomains[@]}"; do
-	subdomain_data "$subdomain" "$domain"
-done
+if [ -z "$2" ]; then
+	for subs in "www" "lb-01" "web-01" "web-02"
+	do
+		print_rec "$1" "$subs"
+	done
+else
+	print_rec "$1" "$2"
+fi
