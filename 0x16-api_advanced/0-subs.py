@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 '''Get number'''
+
+
 import requests
 
 BASE_URL = 'http://reddit.com/r/{}/about.json'
