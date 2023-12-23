@@ -1,16 +1,15 @@
 #!/usr/bin/python3
-""" Queries the Reddit API and returns the
-number of subscribers for a given subreddit. """
-
+'''Get number of reddit channel subscribers'''
 import requests
-headers = {"User-Agent": "ubuntu:hbtn:v1.0 (by /u/piroli_)"}
+
+BASE_URL = 'http://reddit.com/r/{}/about.json'
 
 
 def number_of_subscribers(subreddit):
-    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    request = requests.get(url, headers=headers, allow_redirects=False)
-
-    if request.status_code == 200:
-        return request.json().get("data").get("subscribers")
-
-    return 0
+    '''Gets number of reddit subscribers'''
+    headers = {'User-agent': 'Unix:0-subs:v1'}
+    response = requests.get(BASE_URL.format(subreddit),
+                            headers=headers)
+    if response.status_code != 200:
+        return 0
+    return response.json().get('data', {}).get('subscribers', 0)
